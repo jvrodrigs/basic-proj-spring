@@ -1,0 +1,21 @@
+version: "3.1"
+services:
+  db:
+    build:
+      dockerfile: ./postgres.dockerfile
+      context: ./docker
+    image: auth-db
+    container_name: auth-db
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: admin
+      POSTGRES_USER: admin
+      POSTGRES_DB: auth
+    ports:
+      - "5432:5432"
+    networks:
+      - auth-network
+
+networks:
+  auth-network:
+    driver: bridge
